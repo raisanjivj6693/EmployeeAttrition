@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div style="color:blue">
+        <form action="{{ url_for('predict')}}" method="post">
+            <h2>Attrition Prediction</h2>
+            <table style="width:100%">
+                <tr>
+                    <th><h3>Age</h3><input id="first" name="Age" type="number" required="required"></th>
+                    <th><h3>Monthy Income (in $)</h3><br><input id="second" name="MonthlyIncome" type="number" required="required"></th>
+                    <th><h3>Years at Company?</h3><input id="third" name="YearsAtCompany" type="number" required="required"></th>
+                    <th><h3>Total Working Years?</h3><br><input id="fourth" name="TotalWorkingYears" type="number" required="required"></th>
+                    <th><h3>No of Company Worked?</h3><br><input id="fifth" name="NumCompaniesWorked" type="number" required="required"></th>
+                </tr>
+                <tr>
+                    <th><h3>Overtime?</h3><br><select name="overtime" id="overtime" required="required">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select></th>
+                    <th><h3>Job Satisfaction</h3><br><select name="JobSatisfaction" id="js" required="required">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select></th>
+                    <th><h3>Distiance from Home?</h3><br><input id="sixth" name="DistanceFromHome" type="number" required="required"></th>
+                    <th><h3>Environment Satisfaction</h3><br><select name="EnvironmentSatisfaction" id="es" required="required">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select></th>
+                    <th><h3>Relationship Satisfaction</h3><br><select name="RelationshipSatisfaction" id="rs" required="required">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select></th>
+                </tr>
+            </table>
+            <br><br>
+            <p style="color:white;">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+            <br><br><button id="sub" type="submit ">Classification</button>
+            <br><br>
+            <p style="color:white;">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+        </form>
+        <h3 style="color:#EBA54C; background-color:black; font-family:verdana; font-size:160%;">{{ prediction_text }}<h3>
+    </div>
+
+
+
+
+    <style>
+        body {
+            background-color: #0083B7;
+            text-align: center;
+            padding: 0px;
+        }
+
+        #box {
+            border-radius: 60px;
+            border-color: 45px;
+            border-style: solid;
+            font-family: cursive;
+            text-align: center;
+            background-color: rgb(168, 131, 61);
+            font-size: medium;
+            position: absolute;
+            width: 700px;
+            bottom: 9%;
+            height: 850px;
+            right: 30%;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+        }
+
+        #overtime {
+            width: 250px;
+            height: 30px;
+            text-align: center;
+            text-align-last:center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #overtime:hover {
+            background-color: coral;
+        }
+
+        #js {
+            width: 250px;
+            height: 30px;
+            text-align: center;
+            text-align-last:center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+
+         #js:hover {
+            background-color: coral;
+        }
+
+        #es {
+            width: 250px;
+            height: 30px;
+            text-align: center;
+            text-align-last:center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #es:hover {
+            background-color: coral;
+        }
+        
+        #rs {
+            width: 250px;
+            height: 30px;
+            text-align: center;
+            text-align-last:center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #rs:hover {
+            background-color: coral;
+        }
+        
+        #sub {
+            width: 200px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #sub:hover {
+            background-color: orange;
+        }
+        
+        #first {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #second {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #third {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #fourth {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+		
+		#fifth {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+		
+		#sixth {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: black;
+        }
+
+         h2 {
+            color: white;
+            font-size: 40px;
+            font-family:verdana;
+        }
+
+        td, th {
+
+            width: 300px;
+            text-align: center;
+            vertical-align: bottom;
+         }
+    </style>
+</body>
+
+</html>
