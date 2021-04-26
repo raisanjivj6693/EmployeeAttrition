@@ -27,10 +27,8 @@ def predict():
         overtime=request.form['overtime']
         if(overtime=='Yes'):
             overtime=1
-            overtime=0
         else:
             overtime=0
-            overtime=1
 
         DistanceFromHome = int(request.form['DistanceFromHome'])
 
